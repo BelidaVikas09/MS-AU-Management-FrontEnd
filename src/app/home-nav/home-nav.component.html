@@ -1,0 +1,44 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport='false'
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false" >
+    <mat-toolbar>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        > 
+      <mat-icon aria-label="Side nav toggle icon">clear</mat-icon>
+     </button> 
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink='/assessment'>Assessment Management</a>
+      <a mat-list-item routerLink='/course'>Course Management</a>
+      <a mat-list-item routerLink='/opportunity'>Oppurtunity Management</a>
+      <a mat-list-item routerLink='/onboarding'>Onboarding Management</a>
+      <a mat-list-item routerLink='/candidate'>Candidate Management</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>MS-AU-ManagementSystem</span>
+      
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
+    <div>
+      <h1 class="text-center mt-3">Welcome to Home Section</h1>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

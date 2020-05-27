@@ -1,0 +1,10 @@
+.spacer{
+    margin-left:800px;
+}
+li:hover{
+    background-color: midnightblue;
+}
+li,a{
+    color:white;
+    font-weight: bold;
+}
