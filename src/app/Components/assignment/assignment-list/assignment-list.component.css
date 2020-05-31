@@ -1,0 +1,14 @@
+.box{
+    height:800px;
+    border:1px solid gainsboro;
+}
+.list-group-item{
+    height: 60px;
+    padding-top:20px;
+    padding-left:30px;
+}
+li:hover{
+    background-color: #4285f4;
+    color:white;
+    cursor: pointer;
+}

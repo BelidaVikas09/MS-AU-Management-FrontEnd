@@ -9,16 +9,34 @@
 .sidenav .mat-toolbar {
   background: inherit;
   color:white;  
-  background-color:#3f51b5;
+  background-color:#4285f4
 
 }
 
 .mat-toolbar.mat-primary {
+  background-color: #4285f4;
+  color:white;
   position: sticky;
   top: 0;
   z-index: 1;
 }
-
-a:hover{
-  background-color: #3f51b5;
+.mat-list-item-ripple .mat-ripple{
+  background-color: #4285f4;
+  color:white;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.img-fluid{
+  height: 45px;
+  margin-right:10px;
+}
+.reduceText{
+   font-size:18px;
+   margin-right: 5px;
+}
+.reducelogout{
+  font-size:18px;
+  cursor: pointer;
+  margin-left:5px;
 }

@@ -1,3 +1,15 @@
-.dv1{
-    margin-top: 50px;
+.containers{
+    width:250px;
+    margin-top:20px;
+}
+.linkhover:hover{
+    background-color: #4285f4;
+    color:white;
+}
+li{
+    color: blue;
+}
+.head{
+    color:black;
+    font-weight: bold;
 }

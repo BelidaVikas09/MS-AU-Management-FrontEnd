@@ -1,0 +1,66 @@
+<mat-toolbar>
+    <span class="addmargin">{{service.form.controls['$key'].value?"Edit Project":"Add Project"}}</span>
+     <span class="fill-remaining-width"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+   <mat-grid-list cols=2 rowHeight="300px">
+            <mat-grid-tile>
+                <div class="controles-container">
+                    <input type="hidden" formControlName="$key">
+                    <mat-form-field>
+                        <input formControlName="projectname" matInput placeholder="projectname">
+                        <mat-error>This field is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="candidatename" matInput placeholder="name">
+                        <mat-error>This field is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="course" matInput placeholder="course">
+                        <mat-error>This field is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="trainer" matInput placeholder="trainer">
+                        <mat-error>This field is required</mat-error>
+                    </mat-form-field> 
+                    <mat-form-field>
+                        <input type="number" formControlName="testingmarks" matInput placeholder="testingmarks" min="0" max="30">
+                        <mat-error *ngIf="service.form.controls['testingmarks'].errors?.required">This field is required</mat-error>
+                        <mat-error *ngIf="service.form.controls['testingmarks'].errors?.min">minimum should be 0</mat-error>
+                        <mat-error *ngIf="service.form.controls['testingmarks'].errors?.max">maximum should be 100</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <div class="controles-container">
+                    <mat-form-field>
+                        <input type="number" formControlName="buildmarks" matInput placeholder="buildmarks" min="0" max="30">
+                        <mat-error *ngIf="service.form.controls['buildmarks'].errors?.required">This field is required</mat-error>
+                        <mat-error *ngIf="service.form.controls['buildmarks'].errors?.min">minimum should be 0</mat-error>
+                        <mat-error *ngIf="service.form.controls['buildmarks'].errors?.max">maximum should be 100</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="number" formControlName="processmarks" matInput placeholder="processmarks" min="0" max="40">
+                        <mat-error *ngIf="service.form.controls['processmarks'].errors?.required">This field is required</mat-error>
+                        <mat-error *ngIf="service.form.controls['processmarks'].errors?.min">minimum should be 0</mat-error>
+                        <mat-error *ngIf="service.form.controls['processmarks'].errors?.max">maximum should be 100</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="location" matInput placeholder="location">
+                        <mat-error>This field is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="number" formControlName="year" matInput placeholder="year" min="2010" max="2020">
+                        <mat-error *ngIf="service.form.controls['year'].errors?.required">This field is required</mat-error>
+                        <mat-error *ngIf="service.form.controls['year'].errors?.min">minimum should be 2010</mat-error>
+                        <mat-error *ngIf="service.form.controls['year'].errors?.max">maximum should be 2020</mat-error>
+                    </mat-form-field>
+                    <div class="button-row">
+                        <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+                        <button mat-raised-button color="warn" type="submit" (click)="onClear()">clear</button>
+                    </div>
+                </div>
+            </mat-grid-tile>
+   </mat-grid-list>
+</form>

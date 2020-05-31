@@ -2,7 +2,7 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport='false'
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false" >
+      [opened]="(isHandset$ | async) === true" >
     <mat-toolbar>
       <button
         type="button"
@@ -28,11 +28,15 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
+        *ngIf="!drawer.opened"
         >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon" >menu</mat-icon>
       </button>
       <span>MS-AU-ManagementSystem</span>
-      
+      <span class="example-spacer"></span>
+      <img src={{service.user.image}} alt="" class="img-fluid rounded-circle" height="30px">
+      <span class="reduceText">{{service.user.name}}</span>
+      <span class="reducelogout" (click)="logout()">Logout</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <ng-content></ng-content>

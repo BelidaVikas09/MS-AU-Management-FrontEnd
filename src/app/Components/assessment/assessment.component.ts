@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./assessment.component.css']
 })
 export class AssessmentComponent implements OnInit {
-
+  componame="Assessment Module"
   constructor() { }
-
   ngOnInit(): void {
   }
-
+  
 }

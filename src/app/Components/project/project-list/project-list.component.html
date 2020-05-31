@@ -1,0 +1,82 @@
+<app-generic-nav [componame]="componame"></app-generic-nav>
+<div class="row">
+    <div class="col-md-2">
+        <div class="box">
+            <ul class="list-group">
+                 <li class="list-group-item" (click)="userTable()">Your Records</li>
+                 <li class="list-group-item" (click)="allTable()">Class Records</li> 
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="search-div" *ngIf="displayUser">
+            <button mat-raised-button (click)="onCreate()">
+               <mat-icon>add</mat-icon>Create
+            </button>
+            <mat-form-field class="search-form-field" floatLabel="never">
+                      <input matInput [(ngModel)]="searchKey" placeholder="search" autocomplete="off" (keyup)="applyFilter()">
+                      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onClear()" *ngIf="searchKey">
+                           <mat-icon>close</mat-icon>
+                      </button>
+            </mat-form-field>
+        </div>
+        <h2 style="margin-left:30px; margin-top:20px;" *ngIf="displayUser">Your Project Records</h2>
+        <div class="mat-elevation-z8" *ngIf="displayUser">
+            <mat-table [dataSource]="listdata" matSort>
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="projname">
+                    <mat-header-cell *matHeaderCellDef>projectname</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.projname}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="candidatename">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>candidatename</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.candidatename}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="trainer">
+                    <mat-header-cell *matHeaderCellDef>trainer</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.trainer}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="course">
+                    <mat-header-cell *matHeaderCellDef>course</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.course}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="buildmarks">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>buildmarks</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.buildmarks}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="testingmarks">
+                 <mat-header-cell *matHeaderCellDef mat-sort-header>testingmarks</mat-header-cell>
+                 <mat-cell *matCellDef="let element">{{element.testingmarks}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="processmarks">
+                 <mat-header-cell *matHeaderCellDef mat-sort-header>processmarks</mat-header-cell>
+                 <mat-cell *matCellDef="let element">{{element.processmarks}}</mat-cell>
+               </ng-container>
+                <ng-container matColumnDef="location">
+                    <mat-header-cell *matHeaderCellDef>location</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.location}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="year">
+                    <mat-header-cell *matHeaderCellDef>year</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.year}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                      <mat-cell *matCellDef="let row">
+                          <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+                          <button mat-icon-button color="warn" (click)="onDelete(row)"><mat-icon>delete_outline</mat-icon></button>
+                      </mat-cell> 
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
+             </mat-table>
+             <mat-paginator [pageSizeOptions]="[5,10,20]" [pageSize]="5" showFirstLastButtons> </mat-paginator>
+       </div>
+       <div *ngIf="displayTable">
+          <app-project-list-all></app-project-list-all>
+       </div>
+    </div>   
+</div>

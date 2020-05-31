@@ -8,23 +8,30 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link active" (click)="onClick('about')">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link active" (click)="onClick('contact Us')">Contact Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Products</a>
+          <a class="nav-link active" (click)="onClick('Products')">Products</a>
         </li>
       </ul>
-      <button (click)="socialSignIn('google')" class="btn btn-lg btn-warning spacer text-white">
-        <i class='fab fa-google' ></i>Sign in with Google</button>
+      <div class="navbar-nav ml-auto">
+        <button (click)="socialSignIn('google')" class="btn btn-lg btn-warning spacer text-white">
+          <i class="fab fa-google"></i> Sign in with Google</button>
+      </div>
     </div>
   </nav>
-
-<div class="container-fluid" style="margin-top: 4%;">
-    <div class="row">
-        About
-    </div>    
-</div>
-    
+<div class="container-fluids" id="about" style="margin-top: 4%;">
+      <img src="../../assets/morgan-stanleyjpg.jpeg" alt="morgan-stanley" width="100%" height="30%">
+      <div class="content">
+        <h1>About Morgan Stanley</h1>
+        <p class="p1">                 We believe capital can work to
+                        benefit all of society</p>
+        <p class="p1">  We make this belief a reality by putting clients first, leading with 
+          exceptional ideas, doing the right thing, and giving back.</p>
+          <p class="p1">Morgan Stanley is in a unique position to advance sustainability across capital markets. Our efforts require the wholehearted support of our people. From living our core values to nurturing an inclusive workplace to addressing the key sustainability challenges of our time, our employees make Morgan Stanley what it is today</p>
+      </div>   
+</div>   
+  

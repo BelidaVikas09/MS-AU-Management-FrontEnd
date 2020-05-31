@@ -1,0 +1,13 @@
+.img-fluid{
+    height: 35px;
+    margin-top:10px;
+    margin-right:10px;
+}
+.nameCls{
+    color:white;
+    margin-top:15px;
+    margin-right: 20px;
+}
+.navbar.navbar-expand-lg{
+    height:100px;
+}

@@ -1,6 +1,3 @@
-.spacer{
-    margin-left:800px;
-}
 li:hover{
     background-color: midnightblue;
 }
@@ -8,3 +5,38 @@ li,a{
     color:white;
     font-weight: bold;
 }
+a{
+    font-size: large;
+}
+
+.container-fluids {
+    position: relative;
+    margin-left: 0em;
+    margin-right: 0em;
+}
+.container-fluids .content {
+    position: absolute;
+    bottom: 0%;
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+    height:fit-content;
+  
+  }
+  pre{
+      color:white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 27px;
+    line-height: 30px;
+  }
+  .p1{
+      font-size: 18px;
+  }
+  .container-fluids img {
+      height:650px;
+  }
+ .btn-warning{
+     background-color: tomato;
+ }
