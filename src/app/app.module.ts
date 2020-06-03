@@ -51,6 +51,10 @@ import { QuizListAllComponent } from './Components/quiz/quiz-list-all/quiz-list-
 import { McqListAllComponent } from './Components/mcq/mcq-list-all/mcq-list-all.component';
 import { AssignmentListAllComponent } from './Components/assignment/assignment-list-all/assignment-list-all.component';
 import { ProjectListAllComponent } from './Components/project/project-list-all/project-list-all.component';
+import { DisplayTotalMarksComponent } from './Components/display-total-marks/display-total-marks.component';
+import { AuthGuard } from './auth.guard';
+import { TrainerComponent } from './Components/trainer/trainer.component';
+import { TrainerListComponent } from './Components/trainer/trainer-list/trainer-list.component';
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
   [
@@ -88,7 +92,10 @@ export function getAuthServiceConfigs() {
     QuizListAllComponent,
     McqListAllComponent,
     AssignmentListAllComponent,
-    ProjectListAllComponent
+    ProjectListAllComponent,
+    DisplayTotalMarksComponent,
+    TrainerComponent,
+    TrainerListComponent
   ],
   imports: [
     BrowserModule,
@@ -122,13 +129,14 @@ export function getAuthServiceConfigs() {
       provide: MatDialogRef,
       useValue: {}
     },
-    QuizService 
+    QuizService ,
+    AuthGuard
   ],
   schemas: [
       CUSTOM_ELEMENTS_SCHEMA,
       NO_ERRORS_SCHEMA
   ],
-  entryComponents: [QuizComponent,MatConfirmDialogComponent, McqComponent,AssignmentComponent,ProjectComponent],
+  entryComponents: [QuizComponent,MatConfirmDialogComponent, McqComponent,AssignmentComponent,ProjectComponent,TrainerComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

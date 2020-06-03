@@ -7,6 +7,50 @@
         <li  class="list-group-item text-center linkhover"  routerLink='/mcq'>Mcq</li>
         <li  class="list-group-item text-center linkhover"  routerLink='/project'>Project</li>
         <li  class="list-group-item text-center linkhover"  routerLink='/assignment'>Assignment</li>
-      </div>
+        <li  class="list-group-item text-center linkhover"  (click)="ondisplayTable()">Overall Percentage</li>
+        <li class="list-group-item text-center linkhover" (click)="onDisplayForm()">Change Assessment Weightage</li>
+   </div>
+</div>
+   <div class="col-md-8">
+        <app-display-total-marks *ngIf="displayTable"></app-display-total-marks>
+        <div class="centerform">
+         <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()" *ngIf="displayForm">
+            <h2 class="text-center ">Change the Weightage of the Assessments</h2>
+            <mat-grid-list cols=1 rowHeight="300px">
+                     <mat-grid-tile>
+                         <div class="controles-container">
+                             <mat-form-field>
+                                <input type="number" formControlName="quizWeightage" matInput placeholder="quizWeightage" min="0.1" max="0.5">
+                                 <mat-error *ngIf="service.form.controls['quizWeightage'].errors?.required">This field is required</mat-error>
+                                 <mat-error *ngIf="service.form.controls['quizWeightage'].errors?.min">minimum should be 0.1</mat-error>
+                                 <mat-error *ngIf="service.form.controls['quizWeightage'].errors?.max">maximum should be 0.5</mat-error>                             
+                             </mat-form-field>
+                             <mat-form-field>
+                                 <input  type="number" formControlName="mcqWeightage" matInput placeholder="mcqWeightage" min="0.1" max="0.5">
+                                 <mat-error *ngIf="service.form.controls['mcqWeightage'].errors?.required">This field is required</mat-error>
+                                 <mat-error *ngIf="service.form.controls['mcqWeightage'].errors?.min">minimum should be 0.1</mat-error>
+                                 <mat-error *ngIf="service.form.controls['mcqWeightage'].errors?.max">maximum should be 0.5</mat-error>                             
+                             </mat-form-field>
+                             <mat-form-field>
+                                <input type="number" formControlName="assignmentWeightage" matInput placeholder="assignmentWeightage" min="0.1" max="0.5">
+                                 <mat-error *ngIf="service.form.controls['assignmentWeightage'].errors?.required">This field is required</mat-error>
+                                 <mat-error *ngIf="service.form.controls['assignmentWeightage'].errors?.min">minimum should be 0.1</mat-error>
+                                 <mat-error *ngIf="service.form.controls['assignmentWeightage'].errors?.max">maximum should be 0.5</mat-error>
+                             </mat-form-field>
+                             <mat-form-field>
+                                 <input type="number" formControlName="projectWeightage" matInput placeholder="projectWeightage" min="0" max="100">
+                                 <mat-error *ngIf="service.form.controls['projectWeightage'].errors?.required">This field is required</mat-error>
+                                 <mat-error *ngIf="service.form.controls['projectWeightage'].errors?.min">minimum should be 0</mat-error>
+                                 <mat-error *ngIf="service.form.controls['projectWeightage'].errors?.max">maximum should be 100</mat-error>
+                             </mat-form-field>
+                             <div class="button-row">
+                                 <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+                                 <button mat-raised-button color="warn" type="submit" (click)="onClear()">clear</button>
+                             </div>
+                         </div>
+                     </mat-grid-tile>
+            </mat-grid-list> 
+         </form>   
+      </div>     
    </div>
 </div>

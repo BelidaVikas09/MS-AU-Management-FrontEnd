@@ -9,6 +9,7 @@ import { AssignmentService } from 'src/app/services/assignment.service';
 import { AssignmentComponent } from '../assignment.component';
 import { LocalStorageService } from 'angular-web-storage';
 import { SocialUser } from 'angular-6-social-login';
+import {Chart} from 'chart.js';
 @Component({
   selector: 'app-assignment-list',
   templateUrl: './assignment-list.component.html',
@@ -19,6 +20,10 @@ export class AssignmentListComponent implements OnInit {
  public arr:any=[]
  displayUser=true;
  displayTable=false;
+ labels:any=[]
+ data:any=[]
+ marks:any=[]
+ BarChart=[]
  public user:any=SocialUser;
  listdata: MatTableDataSource<any>;
  displayedColumns:string[]=['id','assignmentname','candidatename','trainer','course','marks','location','year','actions']
@@ -39,6 +44,45 @@ export class AssignmentListComponent implements OnInit {
       this.listdata=new MatTableDataSource(this.arr);
       this.listdata.sort=this.sort 
       this.listdata.paginator=this.paginator 
+    })
+    this.service.getAvgMarks().subscribe(resp=>{
+      this.data=resp;
+      this.data.map(arr=>{
+        this.labels.push(arr.year);
+        this.marks.push(arr.marks);
+      })
+      console.log("marks and labels",this.labels, this.marks);
+      this.BarChart = new Chart('barChart', {
+       type: 'bar',
+     data: {
+      labels: this.labels,
+      datasets: [{
+          label: 'Marks',
+          data: this.marks,
+          backgroundColor: 
+          'rgba(75, 192, 192, 0.2)',
+          
+          borderColor: 
+          'rgba(75, 192, 192, 0.2)',
+          borderWidth: 0
+      }]
+     }, 
+     options: {
+      title:{
+          text:"Assignment Average Marks over the year.",
+          display:true,
+          responsive: true,
+          maintainAspectRatio: false
+      },
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero:true
+              }
+          }]
+      }
+     }
+     }); 
     })
   }
   onClear(){

@@ -25,6 +25,8 @@
     "angular-bootstrap-md": "^9.3.1",
     "angular-web-storage": "^9.0.0",
     "bootstrap": "^4.5.0",
+    "chart.js": "^2.9.3",
+    "file-saver": "^2.0.2",
     "jquery": "^3.5.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

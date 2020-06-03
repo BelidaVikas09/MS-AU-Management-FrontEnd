@@ -74,4 +74,7 @@ export class QuizService {
   getQuizByUser(name){
       return this.http.get(`msau/quiz/${name}`)     
   }
+  getAvgMarks(){
+    return this.http.get('msau/quizavg');
+  }
 }

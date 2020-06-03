@@ -52,6 +52,9 @@ export class ProjectService {
  getProjectByUser(name){
   return this.http.get(`msau/Project/${name}`);
  }
+ getAvgMarks(){
+  return this.http.get('msau/projectavg');
+}
 updateProject(project){
   console.log(project.$key)
   return this.http.put('msau/updateProject',{

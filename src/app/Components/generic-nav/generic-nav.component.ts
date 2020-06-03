@@ -24,4 +24,5 @@ export class GenericNavComponent implements OnInit {
     this.localstorage.remove("islogged");
     this.router.navigate(['\login']);
   }
+
 }

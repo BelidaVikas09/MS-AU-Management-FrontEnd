@@ -59,6 +59,9 @@ updateAssignment(user){
      year:user.year     
   })
 }
+getAvgMarks(){
+  return this.http.get('msau/assignmentavg');
+}
 deleteAssignment(id:number){
      return this.http.delete(`msau/delassignment/${id}`)        
 }

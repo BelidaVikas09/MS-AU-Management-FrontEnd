@@ -47,6 +47,9 @@ export class McqService {
  getMcqByUser(name){
    return this.http.get(`msau/mcq/${name}`);
  }
+ getAvgMarks(){
+  return this.http.get('msau/mcqavg');
+}
 updateMcq(user){
   console.log(user.$key)
   return this.http.put('msau/updatemcq',{

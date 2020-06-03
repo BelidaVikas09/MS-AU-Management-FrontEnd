@@ -19,7 +19,6 @@ export class QuizComponent implements OnInit {
   onClear(){
      this.service.form.reset();
      this.service.initializeFormgroup();
-     this.noti.success("Record Added SuccessFully")
   }
  onSubmit(){
    if(this.service.form.valid){

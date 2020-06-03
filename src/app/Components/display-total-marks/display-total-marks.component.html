@@ -1,0 +1,38 @@
+<h2 class="text-center">Score Card of All Students</h2>
+<p class="p1">Note: Total Percentage is calculated by giving weightage to the assessment types</p>
+<p class="p1">Current weightage is as follows quiz- {{weightage.quz}} mcq- {{weightage.mcq}} assignment- {{weightage.assignment}}  project- {{weightage.project}}</p>
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="listdata" matSort>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="quizMarks">
+            <mat-header-cell *matHeaderCellDef>quizMarks</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.quizMarks}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="mcqMarks">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>mcqMarks</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.mcqMarks}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="assignmentMarks">
+            <mat-header-cell *matHeaderCellDef>assignmentMarks</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.assignmentMarks}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="projectMarks">
+            <mat-header-cell *matHeaderCellDef>projectMarks</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.projectMarks}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="totalPercentage">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>totalPercentage</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.totalPercentage | number : '1.2-2'}}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
+     </mat-table>
+     <mat-paginator [pageSizeOptions]="[5,10,20]" [pageSize]="5" showFirstLastButtons> </mat-paginator>
+</div>
+<div>
+    <h3 class="text-center">Your Marks in Visualised Form</h3>
+    <canvas id="barChart" height="150px"></canvas>  
+</div>
