@@ -30,10 +30,21 @@ onSubmit(){
     formData.append("prerequisites",this.service.form.get("prerequisites").value);
     formData.append("description",this.service.form.get("description").value);
     formData.append("file",this.service.form.get("file").value);
-    this.service.insertTrainer(formData).subscribe(resp=>{
+    if(!this.service.form.get('$key').value){
+      console.log(this.service.form.get('$key').value);
+      this.service.insertTrainer(formData).subscribe(resp=>{
       console.log("hoooray",resp);
       this.noti.success("created record successfully");
-    }) 
+      location.reload();
+    }) }
+    else{
+      console.log(this.service.form.get('$key').value);
+      formData.append("id",this.service.form.get('$key').value);
+      this.service.updateTrainer(formData).subscribe(resp=>{
+        this.noti.success("updated record successfully");
+        location.reload();
+      }) 
+    }
   }
 }
  onClose(){

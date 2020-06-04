@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,EventEmitter,Output } from '@angular/core';
 import { LocalStorageService } from 'angular-web-storage';
 import { SocialUser } from 'angular-6-social-login';
 import { Router } from '@angular/router';

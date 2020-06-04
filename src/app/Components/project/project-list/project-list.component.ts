@@ -25,6 +25,10 @@ export class ProjectListComponent implements OnInit {
  data:any=[]
  marks:any=[]
  BarChart=[]
+ labelCities:any=[]
+ dataCity:any=[]
+ marksCity:any=[]
+ BarChartCity=[]
  listdata: MatTableDataSource<any>;
  displayedColumns:string[]=['id','projname','candidatename','trainer','course','buildmarks','testingmarks','processmarks','location','year','actions']
  @ViewChild(MatSort)sort:MatSort;
@@ -35,6 +39,7 @@ export class ProjectListComponent implements OnInit {
     private noti:NotificationService,
     private Dialog:DialogService,
     private localstorage:LocalStorageService) { }
+    public search:string=""
   ngOnInit(): void {
     this.user=JSON.parse(this.localstorage.get("islogged"))
     this.service.getProjectByUser(this.user.name).subscribe(resp=>{
@@ -43,6 +48,7 @@ export class ProjectListComponent implements OnInit {
       this.listdata=new MatTableDataSource(this.arr);
       this.listdata.sort=this.sort 
       this.listdata.paginator=this.paginator 
+      this.listdata.filter=this.search.trim().toLowerCase();
     })
     this.service.getAvgMarks().subscribe(resp=>{
       this.data=resp;
@@ -59,10 +65,9 @@ export class ProjectListComponent implements OnInit {
           label: 'Marks',
           data: this.marks,
           backgroundColor: 
-          'rgba(255, 206, 86, 0.2)',
-          
+          'rgba(75, 192, 192, 0.4)',
           borderColor: 
-          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
           borderWidth: 0
       }]
      }, 
@@ -83,6 +88,51 @@ export class ProjectListComponent implements OnInit {
      }
      }); 
     })
+    this.service.getAvgMarks().subscribe(resp=>{
+      this.data=resp;
+      this.data.map(arr=>{
+        this.labels.push(arr.year);
+        this.marks.push(arr.marks);
+      })
+      this.service.getAvgMarksByLoc().subscribe(resp=>{
+        this.dataCity=resp;
+        this.dataCity.map(arr=>{
+         this.labelCities.push(arr.location);
+         this.marksCity.push(arr.processmarks);
+         })
+         this.BarChart = new Chart('barChartcity', {
+         type: 'line',
+         data: {
+         labels: this.labelCities,
+         datasets: [{
+            label: 'Marks',
+            data: this.marksCity,
+            backgroundColor: 
+            'rgba(153, 102, 255, 0.8)',
+            fill:false,
+            borderColor: 
+            'rgba(153, 102, 255, 0.8)',
+            borderWidth: 0
+        }]
+       }, 
+       options: {
+         title:{
+             text:"Project Averages over the cities.",
+             display:true,
+             responsive: true,
+             maintainAspectRatio: false
+         },
+         scales: {
+             yAxes: [{
+                 ticks: {
+                     beginAtZero:true
+                 }
+             }]
+         }
+        }
+        });
+      })
+    })  
   }
   onClear(){
     this.searchKey="";

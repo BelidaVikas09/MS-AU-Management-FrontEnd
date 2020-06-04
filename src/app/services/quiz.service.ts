@@ -77,4 +77,7 @@ export class QuizService {
   getAvgMarks(){
     return this.http.get('msau/quizavg');
   }
+  getAvgMarksByLoc(){
+    return this.http.get('msau/quizavgbyloc');
+  }
 }

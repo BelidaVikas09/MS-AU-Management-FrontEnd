@@ -25,6 +25,9 @@ export class TrainerService {
   insertTrainer(formData:FormData):Observable<any>{
      return this.http.post('msau/addtrainer',formData); 
   }
+  updateTrainer(formData:FormData):Observable<any>{
+    return this.http.put('msau/updatetrainer',formData); 
+ }
   initializeFormgroup(){
     this.form.setValue({
       $key:null,

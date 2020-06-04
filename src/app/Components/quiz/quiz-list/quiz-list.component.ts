@@ -25,6 +25,10 @@ export class QuizListComponent implements OnInit {
  data:any=[]
  marks:any=[]
  BarChart=[]
+ labelCities:any=[]
+ dataCity:any=[]
+ marksCity:any=[]
+ BarChartCity=[]
  listdata: MatTableDataSource<any>;
  displayedColumns:string[]=['id','quizname','candidatename','trainer','course','marks','location','year','actions']
  @ViewChild(MatSort)sort:MatSort;
@@ -46,6 +50,43 @@ export class QuizListComponent implements OnInit {
       this.listdata.paginator=this.paginator 
     })
      console.log("this is array from qui-lizr",this.arr);
+     this.service.getAvgMarksByLoc().subscribe(resp=>{
+       this.dataCity=resp;
+       this.dataCity.map(arr=>{
+        this.labelCities.push(arr.location);
+        this.marksCity.push(arr.marks);
+        })
+        this.BarChart = new Chart('barChart', {
+        type: 'bar',
+        data: {
+        labels: this.labelCities,
+        datasets: [{
+           label: 'Marks',
+           data: this.marksCity,
+           backgroundColor: 
+           'rgba(255, 99, 132, 0.4)',
+           borderColor: 
+           'rgba(255, 99, 132, 0.2)',
+           borderWidth: 0
+       }]
+      }, 
+      options: {
+        title:{
+            text:"Quiz Averages over the cities.",
+            display:true,
+            responsive: true,
+            maintainAspectRatio: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+       }
+       });
+     })
      this.service.getAvgMarks().subscribe(resp=>{
        this.data=resp;
        this.data.map(arr=>{
@@ -53,24 +94,24 @@ export class QuizListComponent implements OnInit {
          this.marks.push(arr.marks);
        })
        console.log("marks and labels",this.labels, this.marks);
-       this.BarChart = new Chart('barChart', {
-        type: 'bar',
-      data: {
+       this.BarChartCity = new Chart('barChartcity', {
+       type: 'line',
+       data: {
        labels: this.labels,
        datasets: [{
            label: 'Marks',
            data: this.marks,
            backgroundColor: 
-           'rgba(54, 162, 235, 0.2)',
-           
+           'rgba(54, 162, 235, 0.8)',
+           fill:false,
            borderColor: 
-           'rgba(54, 162, 235, 0.2)',
+           'rgba(54, 162, 235, 0.8)',
            borderWidth: 0
        }]
       }, 
       options: {
        title:{
-           text:"Mcq Averages over the year.",
+           text:"Quiz Averages over the year.",
            display:true,
            responsive: true,
            maintainAspectRatio: false
@@ -83,8 +124,9 @@ export class QuizListComponent implements OnInit {
            }]
        }
       }
-      }); 
-     })
+      });
+    }) 
+     
   }
   onClear(){
     this.searchKey="";

@@ -70,12 +70,26 @@ export class TrainerListComponent implements OnInit {
     }
  })
 }
-download(element){
-    console.log("you clicked this row",element);
-    const type=this.arr.filter(arr=>{
-      return arr.id===element.id; 
-    })
-    console.log(element.file.length);
-    //saveAs(new Blob([element.file],{type:'application/pdf'}),type[0].filename);
+base64ToArrayBuffer(base64) {
+  const binaryString = window.atob(base64);
+  const len = binaryString.length;
+  const bytes = new Uint8Array(len);
+
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+
+  return bytes.buffer;
+}
+
+download(data) {
+  const byteArray = this.base64ToArrayBuffer(data.file);
+  const type=this.arr.filter(arr=>{
+          return arr.id===data.id; 
+        })
+  const blob = new Blob([byteArray], { type:type[0].filetype });
+  const url = window.URL.createObjectURL(blob);
+  saveAs(blob,type[0].filename);
+  window.open(url);
 }
 }

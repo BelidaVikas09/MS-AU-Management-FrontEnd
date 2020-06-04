@@ -48,8 +48,11 @@ export class McqService {
    return this.http.get(`msau/mcq/${name}`);
  }
  getAvgMarks(){
-  return this.http.get('msau/mcqavg');
-}
+  return this.http.get('msau/mcqavg'); 
+ }
+ getAvgMarksByLoc(){
+  return this.http.get('msau/mcqavgbyloc'); 
+ }
 updateMcq(user){
   console.log(user.$key)
   return this.http.put('msau/updatemcq',{

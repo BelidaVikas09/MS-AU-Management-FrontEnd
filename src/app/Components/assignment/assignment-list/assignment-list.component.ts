@@ -24,6 +24,10 @@ export class AssignmentListComponent implements OnInit {
  data:any=[]
  marks:any=[]
  BarChart=[]
+ labelCities:any=[]
+ dataCity:any=[]
+ marksCity:any=[]
+ BarChartCity=[]
  public user:any=SocialUser;
  listdata: MatTableDataSource<any>;
  displayedColumns:string[]=['id','assignmentname','candidatename','trainer','course','marks','location','year','actions']
@@ -45,6 +49,7 @@ export class AssignmentListComponent implements OnInit {
       this.listdata.sort=this.sort 
       this.listdata.paginator=this.paginator 
     })
+    
     this.service.getAvgMarks().subscribe(resp=>{
       this.data=resp;
       this.data.map(arr=>{
@@ -60,10 +65,10 @@ export class AssignmentListComponent implements OnInit {
           label: 'Marks',
           data: this.marks,
           backgroundColor: 
-          'rgba(75, 192, 192, 0.2)',
+          'rgba(255, 206, 86, 0.4)',
           
           borderColor: 
-          'rgba(75, 192, 192, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
           borderWidth: 0
       }]
      }, 
@@ -84,6 +89,51 @@ export class AssignmentListComponent implements OnInit {
      }
      }); 
     })
+    this.service.getAvgMarks().subscribe(resp=>{
+      this.data=resp;
+      this.data.map(arr=>{
+        this.labels.push(arr.year);
+        this.marks.push(arr.marks);
+      })
+      this.service.getAvgMarksByLoc().subscribe(resp=>{
+        this.dataCity=resp;
+        this.dataCity.map(arr=>{
+         this.labelCities.push(arr.location);
+         this.marksCity.push(arr.marks);
+         })
+         this.BarChart = new Chart('barChartcity', {
+         type: 'line',
+         data: {
+         labels: this.labelCities,
+         datasets: [{
+            label: 'Marks',
+            data: this.marksCity,
+            backgroundColor: 
+            'rgba(153, 102, 255, 0.8)',
+            fill:false,
+            borderColor: 
+            'rgba(153, 102, 255, 0.8)',
+            borderWidth: 0
+        }]
+       }, 
+       options: {
+         title:{
+             text:"Assignment Averages over the cities.",
+             display:true,
+             responsive: true,
+             maintainAspectRatio: false
+         },
+         scales: {
+             yAxes: [{
+                 ticks: {
+                     beginAtZero:true
+                 }
+             }]
+         }
+        }
+        });
+      })
+    })  
   }
   onClear(){
     this.searchKey="";

@@ -25,6 +25,10 @@ export class McqListComponent implements OnInit {
  data:any=[]
  marks:any=[]
  BarChart=[]
+ labelCities:any=[]
+ dataCity:any=[]
+ marksCity:any=[]
+ BarChartCity=[]
  listdata: MatTableDataSource<any>;
  displayedColumns:string[]=['id','mcqname','candidatename','trainer','course','marks','location','year','actions']
  @ViewChild(MatSort)sort:MatSort;
@@ -51,19 +55,56 @@ export class McqListComponent implements OnInit {
         this.labels.push(arr.year);
         this.marks.push(arr.marks);
       })
+      this.service.getAvgMarksByLoc().subscribe(resp=>{
+        this.dataCity=resp;
+        this.dataCity.map(arr=>{
+         this.labelCities.push(arr.location);
+         this.marksCity.push(arr.marks);
+         })
+         this.BarChart = new Chart('barChartcity', {
+         type: 'bar',
+         data: {
+         labels: this.labelCities,
+         datasets: [{
+            label: 'Marks',
+            data: this.marksCity,
+            backgroundColor: 
+            'rgba(255, 99, 132, 0.4)',
+            borderColor: 
+            'rgba(255, 99, 132, 0.2)',
+            borderWidth: 0
+        }]
+       }, 
+       options: {
+         title:{
+             text:"Mcq Averages over the cities.",
+             display:true,
+             responsive: true,
+             maintainAspectRatio: false
+         },
+         scales: {
+             yAxes: [{
+                 ticks: {
+                     beginAtZero:true
+                 }
+             }]
+         }
+        }
+        });
+      })
       console.log("marks and labels",this.labels, this.marks);
       this.BarChart = new Chart('barChart', {
-       type: 'bar',
+       type: 'line',
      data: {
       labels: this.labels,
       datasets: [{
           label: 'Marks',
           data: this.marks,
           backgroundColor: 
-          'rgba(153, 102, 255, 0.2)',
-          
+          'rgba(153, 102, 255, 0.8)',
+          fill:false,
           borderColor: 
-          'rgba(153, 102, 255, 0.2)',
+          'rgba(153, 102, 255, 0.8)',
           borderWidth: 0
       }]
      }, 

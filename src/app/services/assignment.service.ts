@@ -62,6 +62,9 @@ updateAssignment(user){
 getAvgMarks(){
   return this.http.get('msau/assignmentavg');
 }
+getAvgMarksByLoc(){
+  return this.http.get('msau/assignmentavgbyloc');
+}
 deleteAssignment(id:number){
      return this.http.delete(`msau/delassignment/${id}`)        
 }

@@ -55,6 +55,9 @@ export class ProjectService {
  getAvgMarks(){
   return this.http.get('msau/projectavg');
 }
+getAvgMarksByLoc(){
+  return this.http.get('msau/projectavgbyloc');
+}
 updateProject(project){
   console.log(project.$key)
   return this.http.put('msau/updateProject',{
